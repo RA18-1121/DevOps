@@ -72,7 +72,7 @@ export default function App() {
       <div className="eyebrow">MERN • DOCKER • GITHUB ACTIONS</div>
       <header>
         <div>
-          <h1>TaskFlow App<span>.</span></h1>
+          <h1>TaskFlow<span>.</span></h1>
           <p>A small task manager built to demonstrate a complete DevOps pipeline.</p>
         </div>
         <div className="status"><span className="status-dot" /> Live application</div>
