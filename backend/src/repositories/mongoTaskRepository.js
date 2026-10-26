@@ -1,13 +1,6 @@
-import mongoose from 'mongoose';
+import { Task } from '../models/Task.js';
 
-const taskSchema = new mongoose.Schema({
-  title: { type: String, required: true, maxlength: 120 },
-  completed: { type: Boolean, default: false }
-}, { timestamps: true });
-
-const Task = mongoose.model('Task', taskSchema);
-
-export const mongoStore = {
+export const mongoTaskRepository = {
   list: () => Task.find().sort({ createdAt: -1 }).lean(),
   create: (title) => Task.create({ title }),
   updateCompleted: (id, completed) => Task.findByIdAndUpdate(

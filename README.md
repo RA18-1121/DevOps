@@ -49,7 +49,7 @@ npm ci
 npm run build
 ```
 
-The API tests check the health endpoint, input validation, and task creation, listing, completion, and deletion. They use an in-memory test store, so MongoDB is not needed for these tests.
+The API tests check the health endpoint, input validation, and task creation, listing, completion, and deletion. They inject an in-memory repository, so MongoDB is not needed for these tests.
 
 ## GitHub Actions and published images
 
@@ -92,7 +92,14 @@ Publishing an image does not automatically restart the containers on your laptop
 ## Project layout
 
 ```text
-backend/                     Express API, MongoDB model, tests, Dockerfile
+backend/
+  src/server.js              MongoDB connection and server startup
+  src/app.js                 Express setup and route mounting
+  src/models/Task.js         Mongoose task schema
+  src/controllers/           Request validation and responses
+  src/routes/                API URL definitions
+  src/repositories/          MongoDB queries
+  test/                      API tests
 frontend/                    React app, Nginx proxy, Dockerfile
 compose.yaml                 Build and run from local source
 compose.production.yaml      Pull and run images published by GitHub Actions
