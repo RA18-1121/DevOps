@@ -1,4 +1,4 @@
-# Pull images built by GitHub Actions. Set GHCR_OWNER to your lowercase GitHub username.
+# Pull images built by GitHub Actions for RA18-1121/DevOps.
 services:
   mongo:
     image: mongo:7
@@ -14,7 +14,7 @@ services:
       retries: 10
 
   api:
-    image: ghcr.io/${GHCR_OWNER:?Set GHCR_OWNER}/mern-task-api:latest
+    image: ghcr.io/ra18-1121/mern-task-api:latest
     restart: unless-stopped
     environment:
       PORT: 3000
@@ -29,7 +29,7 @@ services:
       retries: 10
 
   web:
-    image: ghcr.io/${GHCR_OWNER:?Set GHCR_OWNER}/mern-task-web:latest
+    image: ghcr.io/ra18-1121/mern-task-web:latest
     restart: unless-stopped
     ports:
       - "8080:80"

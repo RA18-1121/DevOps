@@ -55,20 +55,20 @@ The API tests check the health endpoint, input validation, and task creation, li
 
 The workflow is in `.github/workflows/ci-cd.yml`. Pull requests to `main` and pushes to `main` run tests and build checks. A successful push to `main` also publishes two images:
 
-- `ghcr.io/<your-lowercase-username>/mern-task-api:latest`
-- `ghcr.io/<your-lowercase-username>/mern-task-web:latest`
+- `ghcr.io/ra18-1121/mern-task-api:latest`
+- `ghcr.io/ra18-1121/mern-task-web:latest`
 
 The workflow uses GitHub's built-in `GITHUB_TOKEN` with `packages: write`; no registry password needs to be committed. Each image also receives a commit SHA tag. If your repository uses a different default branch, change `main` in the workflow.
 
-To run the images built by GitHub Actions instead of building locally, first make the GHCR packages public in GitHub's package settings **or** authenticate Docker to GHCR for private packages. Then in PowerShell:
+To run the images built by GitHub Actions instead of building locally, first make the GHCR packages public in GitHub's package settings **or** authenticate Docker to GHCR for private packages. Then from Command Prompt in the project root:
 
-```powershell
-$env:GHCR_OWNER = "your-lowercase-github-username"
+```cmd
+docker compose down
 docker compose -f compose.production.yaml pull
 docker compose -f compose.production.yaml up -d
 ```
 
-If the local Compose stack is already running, stop it first with `docker compose down` to release port 8080. Both Compose files use the same `mongo_data` volume when run from this project directory.
+Both Compose files use the same `mongo_data` volume when run from this project directory.
 
 Publishing an image does not automatically restart the containers on your laptop. Run the `pull` and `up -d` commands above to use the latest published images.
 
@@ -77,7 +77,7 @@ Publishing an image does not automatically restart the containers on your laptop
 1. Run `docker compose up --build -d` and open the task manager.
 2. Add and complete a task. Run `docker compose down` and `docker compose up -d` to demonstrate database persistence.
 3. Push a small change to `main`, then show the green GitHub Actions run and the published image tags.
-4. Stop the local stack, set `GHCR_OWNER`, and run the published images with `compose.production.yaml`.
+4. Stop the local stack and run the published images with `compose.production.yaml`.
 
 ## API
 
